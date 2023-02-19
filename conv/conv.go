@@ -20,7 +20,7 @@ func FarhenheitToCelsius(value float64) float64 {
 }
 
 func FarhenheitToKelvin(value float64) float64 {
-        return (value - 32) * (5/9) + 32
+        return (value - 32) * (5/9) + 273.15
           
 }
 

@@ -29,7 +29,7 @@ func init() {
       flag.Float64Var(&cel, "C", 0.0, "temperatur i grader celsius")
       flag.Float64Var(&kel, "K", 0.0, "temperatur i grader kelvin")	
      // Du må selv definere flag-variablene for "C" og "K"
-	flag.StringVar(&out, "out", "C", "beregne temperatur i C - celsius, F - farhenheit, K- Kelvin")
+	flag.StringVar(&out, "out", "K", "beregne temperatur i C - celsius, F - farhenheit, K- Kelvin")
 	flag.StringVar(&funfacts, "funfacts", "sun", "\"fun-facts\" om sun - Solen, luna - Månen og terra - Jorden")
 	// Du må selv definere flag-variabelen for -t flagget, som bestemmer
 	// hvilken temperaturskala skal brukes når funfacts skal vises
@@ -76,14 +76,25 @@ func main() {
 		// skal returnere °C
 		// fmt.Println("0°F er -17.78°C")
             fmt.Println(conv.FarhenheitToCelsius(fahr))
+          }
+      if out == "K" && isFlagPassed("F") {
             fmt.Println(conv.FarhenheitToKelvin(fahr))
+          }
+      if out == "F" && isFlagPassed("C") {
             fmt.Println(conv.CelsiusToFarhenheit(cel))
+          }
+      if out == "K" && isFlagPassed ("C") {
             fmt.Println(conv.CelsiusToKelvin(cel))
+          }
+      if out == "F" && isFlagPassed ("K") {
             fmt.Println(conv.KelvinToFarhenheit(kel))
+          }
+      if out == "C" && isFlagPassed ("K") {
             fmt.Println(conv.KelvinToCelsius(kel))
+          }
 	}
 
-}
+
 
 // Funksjonen sjekker om flagget er spesifisert på kommandolinje
 // Du trenger ikke å bruke den, men den kan hjelpe med logikken
