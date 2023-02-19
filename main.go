@@ -3,10 +3,13 @@ package main
 import (
 	"flag"
 	"fmt"
+      "github.com/Ajdin15/funtemps/conv"
 )
 
 // Definerer flag-variablene i hoved-"scope"
 var fahr float64
+var cel  float64
+var kel float64
 var out string
 var funfacts string
 
@@ -23,7 +26,9 @@ func init() {
 
 	// Definerer og initialiserer flagg-variablene
 	flag.Float64Var(&fahr, "F", 0.0, "temperatur i grader fahrenheit")
-	// Du må selv definere flag-variablene for "C" og "K"
+      flag.Float64Var(&cel, "C", 0.0, "temperatur i grader celsius")
+      flag.Float64Var(&kel, "K", 0.0, "temperatur i grader kelvin")	
+     // Du må selv definere flag-variablene for "C" og "K"
 	flag.StringVar(&out, "out", "C", "beregne temperatur i C - celsius, F - farhenheit, K- Kelvin")
 	flag.StringVar(&funfacts, "funfacts", "sun", "\"fun-facts\" om sun - Solen, luna - Månen og terra - Jorden")
 	// Du må selv definere flag-variabelen for -t flagget, som bestemmer
@@ -57,17 +62,25 @@ func main() {
 
 	// Her er noen eksempler du kan bruke i den manuelle testingen
 	fmt.Println(fahr, out, funfacts)
+      fmt.Println(cel, out, funfacts)
+      fmt.Println(kel, out, funfacts)
 
-	fmt.Println("len(flag.Args())", len(flag.Args()))
-	fmt.Println("flag.NFlag()", flag.NFlag())
+	// fmt.Println("len(flag.Args())", len(flag.Args()))
+	// fmt.Println("flag.NFlag()", flag.NFlag())
 
-	fmt.Println(isFlagPassed("out"))
+	// fmt.Println(isFlagPassed("out"))
 
 	// Eksempel på enkel logikk
 	if out == "C" && isFlagPassed("F") {
 		// Kalle opp funksjonen FahrenheitToCelsius(fahr), som da
 		// skal returnere °C
-		fmt.Println("0°F er -17.78°C")
+		// fmt.Println("0°F er -17.78°C")
+            fmt.Println(conv.FarhenheitToCelsius(fahr))
+            fmt.Println(conv.FarhenheitToKelvin(fahr))
+            fmt.Println(conv.CelsiusToFarhenheit(cel))
+            fmt.Println(conv.CelsiusToKelvin(cel))
+            fmt.Println(conv.KelvinToFarhenheit(kel))
+            fmt.Println(conv.KelvinToCelsius(kel))
 	}
 
 }
